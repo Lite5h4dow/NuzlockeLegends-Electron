@@ -20,6 +20,7 @@ const Layout = ({ children }: { children?: JSX.Element }): JSX.Element => {
   }
 
   function ToggleNavbar(): void {
+    console.log("test")
     if (r) r({ type: ETypes.ToggleNavbar, payload: null })
   }
 

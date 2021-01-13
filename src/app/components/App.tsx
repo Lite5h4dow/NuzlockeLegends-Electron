@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useReducer } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { AppContext, defaultState } from './context/context'
@@ -18,15 +17,6 @@ const App = (): JSX.Element => {
         </Layout>
       </Router>
     </AppContext.Provider>
-=======
-import React from 'react'
-
-const App = (): JSX.Element => {
-  return (
-    <>
-      <h1>Hello World!?</h1>
-    </>
->>>>>>> template/master
   )
 }
 

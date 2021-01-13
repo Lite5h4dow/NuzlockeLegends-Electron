@@ -1,0 +1,13 @@
+# node modules
+node_modules
+
+#dist files
+dist
+
+#build files
+build
+
+#yarn
+yarn-error.log*
+yarn-error*
+yarn.lock

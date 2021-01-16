@@ -4,7 +4,7 @@ import fb from "firebase";
 
 interface IContext {
   state: IState;
-  reducer: Dispatch<IAction> | undefined;
+  reducer: Dispatch<IAction>;
 }
 
 export interface IState {
@@ -15,12 +15,12 @@ export interface IState {
     };
     login: {
       loggedIn: boolean;
-      data: fb.auth.UserMetadata;
-      credential: fb.auth.UserCredential;
+      data?: fb.auth.UserMetadata;
+      credential?: fb.auth.UserCredential;
     };
     loginService: {
       loading: boolean;
-      error: fb.auth.Error;
+      error?: fb.auth.Error;
     };
   };
 }
@@ -29,14 +29,16 @@ export const defaultState: IState = {
   navbar: { visible: false },
   user: {
     modal: { visible: false },
-    login: { loggedIn: false, data: null, credential: null },
-    loginService: { loading: false, error: null },
+    login: { loggedIn: false, data: undefined, credential: undefined },
+    loginService: { loading: false, error: undefined },
   },
 };
 
 const defaultValue: IContext = {
   state: defaultState,
-  reducer: undefined,
+  reducer: (): Dispatch<IAction> => {
+    return () => {};
+  },
 };
 
 export const AppContext = createContext<IContext>(defaultValue);

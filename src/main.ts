@@ -12,7 +12,7 @@ const createWindow = (): void => {
       devTools: true,
       nodeIntegration: true,
       nativeWindowOpen: true,
-      contextIsolation: true,
+      contextIsolation: false,
     },
     autoHideMenuBar: true,
   });

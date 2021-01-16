@@ -7,7 +7,7 @@ import Reducer from './reducers'
 
 import 'semantic-ui-css/semantic.min.css'
 
-const App = (): ReactElement => {
+const App: React.FC<{}> = () => {
   const [state, reducer] = useReducer(Reducer, defaultState);
   return (
     <AppContext.Provider value={{ state, reducer }}>

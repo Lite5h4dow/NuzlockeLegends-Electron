@@ -24,6 +24,7 @@ const LoginWithService = (): JSX.Element => {
       .catch(handleError)
   }
 
+
   function loginWithApple() {
     r({ type: ETypes.SetLoginLoading, payload: true })
 
@@ -31,6 +32,7 @@ const LoginWithService = (): JSX.Element => {
       .signInWithPopup(new auth.OAuthProvider('apple.com'))
       .then(handleSuccess)
       .catch(handleError)
+
   }
 
   function loginWithTwitter() {

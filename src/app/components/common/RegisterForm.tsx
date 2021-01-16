@@ -18,7 +18,9 @@ const RegisterForm = (): JSX.Element => {
       .then(({ user, credential }) => {
         console.log({ user, credential })
         r({ type: ETypes.UseAuthSuccess, payload: { user, credential } })
-        return user.updateProfile({ displayName: formData.display })
+        if (user != null) {
+          return user.updateProfile({ displayName: formData.display })
+        }
       })
       .catch((err) => { console.log(err); r({ type: ETypes.UseAuthFailure, payload: err }) })
   }

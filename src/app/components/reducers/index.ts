@@ -21,7 +21,7 @@ function handleLogin(state: IState, payload: any): IState {
       loginService: {
         ...state.user.loginService,
         loading: false,
-        error: null,
+        error: undefined,
       },
       modal: {
         visible: false,

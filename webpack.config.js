@@ -12,16 +12,19 @@ module.exports = {
     filename: 'bundle.js',
     path: BUILD_DIR
   },
-  resolve: { extensions: ['.ts', '.tsx', '.js'] },
+  resolve: { extensions: ['.ts', '.tsx', '.js', '.jsx'] },
   module: {
     rules: [
-      { test: /\.(ts|js)x?$/, include: SRC_DIR, loader: "babel-loader" },
+      { test: /\.tsx?$/, include: SRC_DIR, use: "awesome-typescript-loader" },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       { test: /\.(jpg|png|gif|jpeg|woff|woff2|eot|ttf|svg)$/, use: 'url-loader?limit=100000' },
-      { test: /\.(ts|js)x?$/, enforce: 'pre', use: 'source-map-loader' }
+      { test: /\.html$/, use: "html-loader" }
     ]
   },
   plugins: [
-    new HtmlWebpackPlugin({ template: './src/app/index.html' })
+    new HtmlWebpackPlugin({
+      template: './src/app/html/index.html',
+      filename: './index.html'
+    })
   ]
 }

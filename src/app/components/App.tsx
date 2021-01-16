@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { ReactElement, useReducer } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { AppContext, defaultState } from './context/context'
+import Layout from './layout'
+import Routes from './pages/routes'
+import Reducer from './reducers'
 
-const App = (): JSX.Element => {
+import 'semantic-ui-css/semantic.min.css'
+
+const App: React.FC<{}> = () => {
+  const [state, reducer] = useReducer(Reducer, defaultState);
   return (
-    <>
-      <h1>Hello World!?</h1>
-    </>
+    <AppContext.Provider value={{ state, reducer }}>
+      <Router>
+        <Layout>
+          <Routes />
+        </Layout>
+      </Router>
+    </AppContext.Provider>
   )
 }
 

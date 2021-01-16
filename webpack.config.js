@@ -16,6 +16,7 @@ module.exports = {
   module: {
     rules: [
       { test: /\.tsx?$/, include: SRC_DIR, use: "awesome-typescript-loader" },
+      { test: /\.(j|t)sx?$/, enforce: 'pre', use: "source-map-loader" },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
       { test: /\.(jpg|png|gif|jpeg|woff|woff2|eot|ttf|svg)$/, use: 'url-loader?limit=100000' },
       { test: /\.html$/, use: "html-loader" }

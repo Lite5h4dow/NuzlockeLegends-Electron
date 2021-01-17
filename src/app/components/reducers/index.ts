@@ -15,7 +15,6 @@ function handleLogin(state: IState, payload: any): IState {
       login: {
         ...state.user.login,
         loggedIn: true,
-        data: payload.user,
         credential: payload.credential,
       },
       loginService: {
@@ -25,6 +24,19 @@ function handleLogin(state: IState, payload: any): IState {
       },
       modal: {
         visible: false,
+      },
+    },
+  };
+}
+
+function handleLogout(state: IState, payload: any): IState {
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      login: {
+        ...state.user.login,
+        loggedIn: false,
       },
     },
   };
@@ -55,6 +67,9 @@ function reducer(state: IState, action: IAction): IState {
 
     case ETypes.UseAuthFailure:
       return handleLoginError(state, action.payload);
+
+    case ETypes.Logout:
+      return handleLogout(state, action.payload);
 
     case ETypes.SetLoginLoading:
       return {

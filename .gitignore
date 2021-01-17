@@ -11,3 +11,6 @@ build
 yarn-error.log*
 yarn-error*
 yarn.lock
+
+#project settings
+firebaseConfig.json

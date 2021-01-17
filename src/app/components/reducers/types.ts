@@ -6,4 +6,5 @@ export enum ETypes {
   UseAuthSuccess,
   UseAuthFailure,
   SetLoginLoading,
+  Logout,
 }

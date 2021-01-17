@@ -11,7 +11,7 @@ export const MainPage = (): JSX.Element => {
     <Container>
       <Segment className="mainPage">
         Hi there
-        <Button content={'test'} onClick={() => { console.log("ayo wtf homie") }} />
+        <Button content={'test'} onClick={() => { getRiotAccount({ summonerName: "Lite5h4dow", summonerRegion: "euw" }).then((msg) => { console.log(msg) }) }} />
       </Segment>
     </Container>
   )

@@ -15,7 +15,6 @@ export interface IState {
     };
     login: {
       loggedIn: boolean;
-      data?: fb.auth.UserMetadata;
       credential?: fb.auth.UserCredential;
     };
     loginService: {
@@ -29,7 +28,7 @@ export const defaultState: IState = {
   navbar: { visible: false },
   user: {
     modal: { visible: false },
-    login: { loggedIn: false, data: undefined, credential: undefined },
+    login: { loggedIn: false, credential: undefined },
     loginService: { loading: false, error: undefined },
   },
 };

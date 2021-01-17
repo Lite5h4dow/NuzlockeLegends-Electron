@@ -4,6 +4,7 @@ import { AppContext } from '../context/context'
 import { ETypes } from '../reducers'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
+import UserProfile from './UserProfile'
 
 export const UserModal = (): JSX.Element => {
 
@@ -12,7 +13,7 @@ export const UserModal = (): JSX.Element => {
   const { user } = state
 
   function setLoginModal(a: boolean): void {
-    if (r) r({ type: ETypes.ToggleUserModal, payload: a })
+    r({ type: ETypes.ToggleUserModal, payload: a })
   }
 
   const panes = [
@@ -23,7 +24,7 @@ export const UserModal = (): JSX.Element => {
   return (
     <Modal open={user.modal.visible} closeIcon onClose={() => { setLoginModal(false) }}>
       <Modal.Content>
-        <Tab panes={panes} />
+        {user.login.loggedIn ? <UserProfile /> : <Tab panes={panes} />}
       </Modal.Content>
     </Modal >
   )

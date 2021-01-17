@@ -16,16 +16,11 @@ const Layout = ({ children }: { children?: JSX.Element }): JSX.Element => {
   const { state, reducer: r } = useContext(AppContext)
 
   function setNavbar(a: boolean): void {
-    if (r) r({ type: ETypes.SetNavbar, payload: a })
-  }
-
-  function ToggleNavbar(): void {
-    console.log("test")
-    if (r) r({ type: ETypes.ToggleNavbar, payload: null })
+    r({ type: ETypes.SetNavbar, payload: a })
   }
 
   function toggleLoginModal(): void {
-    if (r) r({ type: ETypes.ToggleUserModal, payload: null })
+    r({ type: ETypes.ToggleUserModal, payload: null })
   }
 
   return (
@@ -40,7 +35,7 @@ const Layout = ({ children }: { children?: JSX.Element }): JSX.Element => {
             <Container>
               <Grid columns={2}>
                 <Grid.Column>
-                  <Button icon={"bars"} circular basic color="yellow" floated="left" onClick={() => { ToggleNavbar() }} />
+                  <Button icon={"bars"} circular basic color="yellow" floated="left" onClick={() => { setNavbar(!state.navbar.visible) }} />
                 </Grid.Column>
                 <Grid.Column>
                   <Button icon={"user"} circular basic color="yellow" floated="right" onClick={() => { toggleLoginModal() }} />

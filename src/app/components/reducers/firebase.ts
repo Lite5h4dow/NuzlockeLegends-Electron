@@ -1,17 +1,16 @@
 import firebase from "firebase";
+import "firebase/auth";
+import "firebase/functions";
+import "firebase/firestore";
+
+import firebaseConfig from "../../../../firebaseConfig.json";
 
 export function initFirebase() {
-  var firebaseConfig = {
-    apiKey: "AIzaSyAOJ-1EEXZVg5yJfeQFkP1RRk8Wsl3KXU4",
-    authDomain: "leaguenuzlocke.firebaseapp.com",
-    projectId: "leaguenuzlocke",
-    storageBucket: "leaguenuzlocke.appspot.com",
-    messagingSenderId: "416170210864",
-    appId: "1:416170210864:web:52ef461c91406b7dc81ff5",
-    measurementId: "G-561R9YJ31M",
-  };
-
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(
+    process.env.NODE_ENV === "development"
+      ? firebaseConfig.development
+      : firebaseConfig.production
+  );
   firebase.analytics();
 
   if (process.env.NODE_ENV === "development") {

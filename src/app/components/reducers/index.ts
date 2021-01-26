@@ -1,11 +1,6 @@
-import {IState} from "../context/context";
+import {IState, IAction} from "../interfaces";
 import {ETypes} from "./types";
 export {ETypes} from "./types";
-
-export interface IAction {
-  type: ETypes;
-  payload: any;
-}
 
 function handleLogin(state: IState, payload: any): IState {
   return {

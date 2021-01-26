@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import {IAxiosHook} from "../interfaces";
+import {IRequest} from "../interfaces";
 import axiosInstance from "../plugins/axios";
 
 export const useAssociatedAccounts = () => {
-  const [associatedAccounts, setAssociatedAccounts] = useState<IAxiosHook>({
+  const [associatedAccounts, setAssociatedAccounts] = useState<IRequest>({
     loading: false,
   });
   function getAssociatedAccounts(uid?: string): void {

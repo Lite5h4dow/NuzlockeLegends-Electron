@@ -1,84 +1,110 @@
 import React, {useEffect, useState} from "react";
+import {ActionMeta} from "react-select";
+import {IDropdowns, ILeagueAccount} from "../interfaces";
 import {useAssociatedAccounts} from "./useAssociatedAccounts";
 import {useCurrentUID} from "./useCurrentUID";
 import {useRiotAccount} from "./useRiotAccount";
 
 enum Regions {
   EUW = "euw",
+  NA = "na",
 }
 
 export const useAccountSearch = () => {
-  function getRegionArray() {
-    return Object.keys(Regions).map(i => ({
-      value: i.toLowerCase(),
-      label: i.toUpperCase(),
-    }));
-  }
-
-  const [state, setState] = useState<{
-    userOptions: Array<any>;
-    regionOptions: Array<any>;
-    loading: boolean;
-    selectedUser?: string;
-    selectedRegion: string;
-  }>({
-    userOptions: [],
-    loading: false,
-    regionOptions: getRegionArray(),
-    selectedRegion: getRegionArray()[0].value,
-  });
-
   const {riotAccount, getRiotAccount} = useRiotAccount();
   const {uid} = useCurrentUID();
   const {associatedAccounts, getAssociatedAccounts} = useAssociatedAccounts();
 
-  function getOptions(data: Array<any>) {
-    setState({
-      ...state,
-      userOptions: !!data ? data.map(i => ({value: i, label: i.name})) : [],
+  const RegionOptions = Object.keys(Regions)
+    .map(i => i.toLowerCase())
+    .map(r => ({value: r, label: r.toUpperCase()}));
+  const [dropdowns, setDropdowns] = useState<IDropdowns>({
+    regions: {
+      options: RegionOptions,
+      current: RegionOptions[0],
+    },
+    accounts: {
+      loading: false,
+      options: [],
+    },
+  });
+
+  function onCreateOption(value: string) {
+    getRiotAccount(value, dropdowns.regions.current.value, uid);
+  }
+
+  function setRegion(value: any) {
+    setDropdowns({
+      ...dropdowns,
+      regions: {
+        ...dropdowns.regions,
+        current: value,
+      },
     });
   }
 
-  function createOption(inputValue: string) {
-    getRiotAccount(inputValue, state.selectedRegion, uid);
-  }
-
-  function addUserToOptions(account: any) {
-    setState({
-      ...state,
-      userOptions: [
-        ...state.userOptions,
-        {value: account, label: account.name},
-      ],
+  function setAccount(value: any) {
+    setDropdowns({
+      ...dropdowns,
+      accounts: {
+        ...dropdowns.accounts,
+        current: value,
+      },
     });
   }
 
   useEffect(() => {
-    console.log("getting initial user options from associated");
-    getOptions(associatedAccounts.data);
-  }, []);
+    setDropdowns({
+      ...dropdowns,
+      accounts: {
+        ...dropdowns.accounts,
+        loading: riotAccount.loading,
+      },
+    });
+  }, [riotAccount.loading]);
 
   useEffect(() => {
-    console.log("Updating associated accounts, UID changed.");
-    getAssociatedAccounts(uid);
-  }, [uid]);
-
-  useEffect(() => {
-    console.log("updating user options, uid changed");
-    getOptions(associatedAccounts.data);
-  }, [associatedAccounts.data]);
-
-  useEffect(() => {
-    if (!!riotAccount.data) {
-      addUserToOptions(riotAccount.data);
+    const {data} = riotAccount;
+    if (!!data) {
+      setDropdowns({
+        ...dropdowns,
+        accounts: {
+          ...dropdowns.accounts,
+          options: [
+            ...dropdowns.accounts.options,
+            {value: data, label: data.name},
+          ],
+          current: {value: data, label: data.name},
+          loading: false,
+        },
+      });
     }
   }, [riotAccount.data]);
 
   useEffect(() => {
-    if (!riotAccount.loading) {
-      setState({...state, loading: riotAccount.loading});
+    console.log("current uid", uid);
+    if (!!uid) {
+      getAssociatedAccounts(uid);
     }
-  }, [riotAccount.loading]);
+  }, [uid]);
 
-  return {searchState: state, createOption};
+  useEffect(() => {
+    if (!associatedAccounts.data) {
+      return;
+    }
+
+    console.log(!!associatedAccounts.data, associatedAccounts.data);
+    setDropdowns({
+      ...dropdowns,
+      accounts: {
+        ...dropdowns.accounts,
+        options: (associatedAccounts.data as Array<ILeagueAccount>).map(a => ({
+          label: a.name,
+          value: a,
+        })),
+      },
+    });
+  }, [associatedAccounts.data]);
+
+  return {dropdowns, onCreateOption, setRegion, setAccount};
 };

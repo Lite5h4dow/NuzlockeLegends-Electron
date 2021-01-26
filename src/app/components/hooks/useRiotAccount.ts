@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import {IAxiosHook} from "../interfaces";
+import {IRequest} from "../interfaces";
 import axiosInstance from "../plugins/axios";
 
 export const useRiotAccount = () => {
-  const [riotAccount, setRiotAccount] = useState<IAxiosHook>({
+  const [riotAccount, setRiotAccount] = useState<IRequest>({
     loading: false,
   });
 

@@ -1,11 +1,6 @@
-import { IState } from "../context/context";
-import { ETypes } from "./types";
-export { ETypes } from "./types";
-
-export interface IAction {
-  type: ETypes;
-  payload: any;
-}
+import {IState, IAction} from "../interfaces";
+import {ETypes} from "./types";
+export {ETypes} from "./types";
 
 function handleLogin(state: IState, payload: any): IState {
   return {
@@ -86,13 +81,13 @@ function reducer(state: IState, action: IAction): IState {
     case ETypes.SetNavbar:
       return {
         ...state,
-        navbar: { ...state.navbar, visible: <boolean>action.payload },
+        navbar: {...state.navbar, visible: <boolean>action.payload},
       };
 
     case ETypes.ToggleNavbar:
       return {
         ...state,
-        navbar: { ...state.navbar, visible: !state.navbar.visible },
+        navbar: {...state.navbar, visible: !state.navbar.visible},
       };
 
     case ETypes.SetUserModal:
@@ -100,7 +95,7 @@ function reducer(state: IState, action: IAction): IState {
         ...state,
         user: {
           ...state.user,
-          modal: { ...state.user.modal, visible: <boolean>action.payload },
+          modal: {...state.user.modal, visible: <boolean>action.payload},
         },
       };
 
@@ -109,7 +104,7 @@ function reducer(state: IState, action: IAction): IState {
         ...state,
         user: {
           ...state.user,
-          modal: { ...state.user.modal, visible: !state.user.modal.visible },
+          modal: {...state.user.modal, visible: !state.user.modal.visible},
         },
       };
 

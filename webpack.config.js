@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
 const BUILD_DIR = path.resolve(__dirname, './build/app')
 const SRC_DIR = path.resolve(__dirname, './src/app')
 
@@ -26,6 +27,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/app/html/index.html',
       filename: './index.html'
-    })
-  ]
+    }),
+    new webpack.ExternalsPlugin('commonjs', ['electron'])
+  ],
+  target: "electron-renderer"
 }

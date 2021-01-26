@@ -1,37 +1,39 @@
-import React, { ChangeEvent, Dispatch, useContext, useState } from 'react'
-import { Form, Tab } from 'semantic-ui-react'
-import { AppContext } from '../context/context'
-import LoginWithService from './LoginWithService'
-import { auth } from '../reducers/firebase'
-import { ETypes } from '../reducers'
-import UserFormMessage from './UserFormMessage'
-
+import React, {ChangeEvent, Dispatch, useContext, useState} from "react";
+import {Form, Tab} from "semantic-ui-react";
+import {AppContext} from "../context/context";
+import LoginWithService from "./LoginWithService";
+import {auth} from "../plugins/firebase";
+import {ETypes} from "../reducers";
+import UserFormMessage from "./UserFormMessage";
 
 const LoginForm = (): JSX.Element => {
+  const {state, reducer: r} = useContext(AppContext);
 
-  const { state, reducer: r } = useContext(AppContext)
-
-  const [formValue, setFormValue] = useState({ email: '', pass: '' })
+  const [formValue, setFormValue] = useState({email: "", pass: ""});
 
   function updateEmail(a: ChangeEvent<HTMLInputElement>) {
-    setFormValue({ ...formValue, email: a.currentTarget.value })
+    setFormValue({...formValue, email: a.currentTarget.value});
   }
 
   function updatePass(a: ChangeEvent<HTMLInputElement>) {
-    setFormValue({ ...formValue, pass: a.currentTarget.value })
+    setFormValue({...formValue, pass: a.currentTarget.value});
   }
 
   function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
-    // const data = new FormData(e.currentTarget)
-    r({ type: ETypes.SetLoginLoading, payload: null })
-    auth().signInWithEmailAndPassword(formValue.email, formValue.pass)
-      .then((result) => { r({ type: ETypes.UseAuthSuccess, payload: result }) })
-      .catch((err) => { r({ type: ETypes.UseAuthFailure, payload: err }) })
+    r({type: ETypes.SetLoginLoading, payload: null});
+    auth()
+      .signInWithEmailAndPassword(formValue.email, formValue.pass)
+      .then(result => {
+        r({type: ETypes.UseAuthSuccess, payload: result});
+      })
+      .catch(err => {
+        r({type: ETypes.UseAuthFailure, payload: err});
+      });
   }
 
   return (
     <Tab.Pane>
-      <Form onSubmit={loginSubmit} loading={state.user.loginService.loading} >
+      <Form onSubmit={loginSubmit} loading={state.user.loginService.loading}>
         <Form.Input
           name="email"
           onChange={updateEmail}
@@ -56,8 +58,8 @@ const LoginForm = (): JSX.Element => {
         <Form.Button content="Login" type="Submit" />
       </Form>
       <LoginWithService />
-    </Tab.Pane >
-  )
-}
+    </Tab.Pane>
+  );
+};
 
-export default LoginForm
+export default LoginForm;

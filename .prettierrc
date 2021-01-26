@@ -1,0 +1,6 @@
+{
+  "bracketSpacing": false,
+  "jsxBracketSameLine": false,
+  "arrowParens": "avoid",
+  "tabWidth": 2
+}

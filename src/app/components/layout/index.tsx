@@ -1,29 +1,29 @@
 //React
-import React, { useContext, useReducer, useRef } from "react";
-import { ETypes } from "../reducers";
-import { AppContext } from "../context/context";
-import { UserModal } from "../common";
+import React, {useContext, useReducer, useRef} from "react";
+import {ETypes} from "../reducers";
+import {AppContext} from "../context/context";
+import {UserModal} from "../common";
 
 //CSS
 import "./layout.css";
 
 //Semantic UI
-import { Container, Grid, Button, Menu, Segment, Sidebar } from "semantic-ui-react";
+import {Container, Grid, Button, Menu, Segment, Sidebar} from "semantic-ui-react";
 import Navbar from "./Navbar";
-import { useAccountMonitor, useChampionCache } from "../hooks";
+import {useAccountMonitor, useChampionCache} from "../hooks";
 
-const Layout = ({ children }: { children?: JSX.Element }): JSX.Element => {
-  const { state, reducer: r } = useContext(AppContext);
+const Layout = ({children}: {children?: JSX.Element}): JSX.Element => {
+  const {state, reducer: r} = useContext(AppContext);
 
   useAccountMonitor();
   useChampionCache();
 
   function setNavbar(a: boolean): void {
-    r({ type: ETypes.SetNavbar, payload: a });
+    r({type: ETypes.SetNavbar, payload: a});
   }
 
   function toggleLoginModal(): void {
-    r({ type: ETypes.ToggleUserModal, payload: null });
+    r({type: ETypes.ToggleUserModal, payload: null});
   }
 
   return (

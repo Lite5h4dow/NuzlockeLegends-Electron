@@ -1,40 +1,40 @@
-import React, { useContext, useEffect } from "react";
-import { Segment, Button, Header } from "semantic-ui-react";
-import { AppContext } from "../context/context";
-import { ETypes } from "../reducers";
-import firebase, { auth } from "../plugins/firebase";
+import React, {useContext, useEffect} from "react";
+import {Segment, Button, Header} from "semantic-ui-react";
+import {AppContext} from "../context/context";
+import {ETypes} from "../reducers";
+import firebase, {auth} from "../plugins/firebase";
 
 const LoginWithService = (): JSX.Element => {
-  const { state, reducer: r } = useContext(AppContext);
+  const {state, reducer: r} = useContext(AppContext);
 
-  function handleSuccess({ user, credential }: any) {
-    r({ type: ETypes.UseAuthSuccess, payload: { user, credential } });
+  function handleSuccess({user, credential}: any) {
+    r({type: ETypes.UseAuthSuccess, payload: {user, credential}});
   }
 
   function handleError(err: any) {
-    r({ type: ETypes.UseAuthFailure, payload: err });
+    r({type: ETypes.UseAuthFailure, payload: err});
   }
 
   function loginWithGoogle() {
-    r({ type: ETypes.SetLoginLoading, payload: true });
+    r({type: ETypes.SetLoginLoading, payload: true});
 
     auth().signInWithPopup(new auth.GoogleAuthProvider()).then(handleSuccess).catch(handleError);
   }
 
   function loginWithApple() {
-    r({ type: ETypes.SetLoginLoading, payload: true });
+    r({type: ETypes.SetLoginLoading, payload: true});
 
     auth().signInWithPopup(new auth.OAuthProvider("apple.com")).then(handleSuccess).catch(handleError);
   }
 
   function loginWithTwitter() {
-    r({ type: ETypes.SetLoginLoading, payload: true });
+    r({type: ETypes.SetLoginLoading, payload: true});
 
     auth().signInWithPopup(new auth.TwitterAuthProvider()).then(handleSuccess).catch(handleError);
   }
 
   function LoginWithMicrosoft() {
-    r({ type: ETypes.SetLoginLoading, payload: true });
+    r({type: ETypes.SetLoginLoading, payload: true});
 
     auth().signInWithPopup(new auth.OAuthProvider("microsoft.com")).then(handleSuccess).catch(handleError);
   }

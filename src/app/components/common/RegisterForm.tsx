@@ -1,43 +1,43 @@
-import React, { ChangeEvent, Dispatch, useContext, useState } from "react";
-import { Button, Form, Message, Segment, Tab } from "semantic-ui-react";
-import { AppContext } from "../context/context";
-import { IState, IAction } from "../interfaces";
-import { ETypes } from "../reducers";
-import { auth } from "../plugins/firebase";
+import React, {ChangeEvent, Dispatch, useContext, useState} from "react";
+import {Button, Form, Message, Segment, Tab} from "semantic-ui-react";
+import {AppContext} from "../context/context";
+import {IState, IAction} from "../interfaces";
+import {ETypes} from "../reducers";
+import {auth} from "../plugins/firebase";
 import LoginWithService from "./LoginWithService";
 import UserFormMessage from "./UserFormMessage";
 
 const RegisterForm = (): JSX.Element => {
-  const { state, reducer: r } = useContext(AppContext);
+  const {state, reducer: r} = useContext(AppContext);
 
-  const [formData, setFormData] = useState({ email: "", pass: "", display: "" });
+  const [formData, setFormData] = useState({email: "", pass: "", display: ""});
 
   function registerSubmit(e: React.FormEvent<HTMLFormElement>) {
     auth()
       .createUserWithEmailAndPassword(formData.email, formData.pass)
-      .then(({ user, credential }) => {
-        console.log({ user, credential });
-        r({ type: ETypes.UseAuthSuccess, payload: { user, credential } });
+      .then(({user, credential}) => {
+        console.log({user, credential});
+        r({type: ETypes.UseAuthSuccess, payload: {user, credential}});
         if (user != null) {
-          return user.updateProfile({ displayName: formData.display });
+          return user.updateProfile({displayName: formData.display});
         }
       })
       .catch(err => {
         console.log(err);
-        r({ type: ETypes.UseAuthFailure, payload: err });
+        r({type: ETypes.UseAuthFailure, payload: err});
       });
   }
 
   function setEmail(e: ChangeEvent<HTMLInputElement>) {
-    setFormData({ ...formData, email: e.currentTarget.value });
+    setFormData({...formData, email: e.currentTarget.value});
   }
 
   function setPass(e: ChangeEvent<HTMLInputElement>) {
-    setFormData({ ...formData, pass: e.currentTarget.value });
+    setFormData({...formData, pass: e.currentTarget.value});
   }
 
   function setDisplay(e: ChangeEvent<HTMLInputElement>) {
-    setFormData({ ...formData, display: e.currentTarget.value });
+    setFormData({...formData, display: e.currentTarget.value});
   }
 
   return (

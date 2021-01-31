@@ -1,8 +1,8 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import {HashRouter, Route} from "react-router-dom";
 
 import MainPage from "./mainPage";
-import LiveGamePage from "./liveGamePage"
+import LiveGamePage from "./liveGamePage";
 
 const Routes = (): JSX.Element => {
   return (

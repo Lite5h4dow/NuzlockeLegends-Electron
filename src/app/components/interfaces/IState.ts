@@ -2,6 +2,12 @@ import fb from "firebase";
 
 export interface IState {
   navbar: {visible: boolean};
+  cache: {
+    champions: {
+      loading: boolean;
+      data?: any;
+    };
+  };
   user: {
     modal: {
       visible: boolean;

@@ -108,6 +108,20 @@ function reducer(state: IState, action: IAction): IState {
         },
       };
 
+    case ETypes.SetChampionCache:
+      const {data, loading} = action.payload;
+      return {
+        ...state,
+        cache: {
+          ...state.cache,
+          champions: {
+            ...state.cache.champions,
+            loading,
+            data,
+          },
+        },
+      };
+
     default:
       return state;
   }

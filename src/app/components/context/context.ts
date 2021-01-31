@@ -9,6 +9,11 @@ export const defaultState: IState = {
     login: {loggedIn: false, credential: undefined},
     loginService: {loading: false, error: undefined},
   },
+  cache: {
+    champions: {
+      loading: false,
+    },
+  },
 };
 
 const defaultValue: IContext = {

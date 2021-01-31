@@ -7,9 +7,7 @@ import * as firebaseConfig from "../../../../firebaseConfig.json";
 
 export function initFirebase() {
   firebase.initializeApp(
-    process.env.NODE_ENV === "development"
-      ? firebaseConfig.development
-      : firebaseConfig.production
+    process.env.NODE_ENV === "development" ? firebaseConfig.development : firebaseConfig.production
   );
   firebase.analytics();
 

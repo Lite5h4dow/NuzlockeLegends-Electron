@@ -7,11 +7,7 @@ export const useRiotAccount = () => {
     loading: false,
   });
 
-  function getRiotAccount(
-    summonerName: string,
-    summonerRegion: string,
-    uid?: string
-  ): void {
+  function getRiotAccount(summonerName: string, summonerRegion: string, uid?: string): void {
     setRiotAccount({loading: true});
     axiosInstance({
       method: "post",

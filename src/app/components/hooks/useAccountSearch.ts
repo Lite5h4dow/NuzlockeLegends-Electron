@@ -70,10 +70,7 @@ export const useAccountSearch = () => {
         ...dropdowns,
         accounts: {
           ...dropdowns.accounts,
-          options: [
-            ...dropdowns.accounts.options,
-            {value: data, label: data.name},
-          ],
+          options: [...dropdowns.accounts.options, {value: data, label: data.name}],
           current: {value: data, label: data.name},
           loading: false,
         },

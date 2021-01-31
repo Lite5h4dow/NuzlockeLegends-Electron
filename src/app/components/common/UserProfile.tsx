@@ -1,11 +1,5 @@
 import React, {useContext} from "react";
-import {
-  Button,
-  ButtonGroup,
-  Container,
-  Header,
-  Segment,
-} from "semantic-ui-react";
+import {Button, ButtonGroup, Container, Header, Segment} from "semantic-ui-react";
 import {AppContext} from "../context/context";
 import {ETypes} from "../reducers";
 import {auth} from "../plugins/firebase";

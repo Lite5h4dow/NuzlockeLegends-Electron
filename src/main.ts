@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain, IpcMain} from "electron";
+import {app, BrowserWindow} from "electron";
 import server from "./server";
 
 const port = 4581;
@@ -40,9 +40,4 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
-});
-
-ipcMain.on("test", (event: Electron.IpcMainEvent, args: any) => {
-  console.log(args);
-  event.returnValue = "hello";
 });

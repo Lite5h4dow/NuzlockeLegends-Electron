@@ -1,13 +1,15 @@
 import React from "react";
-import {Switch, Route} from "react-router-dom";
+import { HashRouter, Route } from "react-router-dom";
 
 import MainPage from "./mainPage";
+import LiveGamePage from "./liveGamePage"
 
 const Routes = (): JSX.Element => {
   return (
-    <Switch>
-      <Route path="/" component={MainPage} />
-    </Switch>
+    <HashRouter>
+      <Route path="/" exact component={MainPage} />
+      <Route path="/LiveGame" component={LiveGamePage} />
+    </HashRouter>
   );
 };
 

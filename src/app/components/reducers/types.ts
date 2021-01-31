@@ -7,5 +7,6 @@ export enum ETypes {
   UseAuthFailure,
   SetLoginLoading,
   Logout,
-  SetIsLoggedIn
+  SetIsLoggedIn,
+  SetChampionCache,
 }

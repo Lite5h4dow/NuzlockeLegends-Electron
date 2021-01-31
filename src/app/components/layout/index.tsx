@@ -8,21 +8,15 @@ import { UserModal } from "../common";
 import "./layout.css";
 
 //Semantic UI
-import {
-  Container,
-  Grid,
-  Button,
-  Menu,
-  Segment,
-  Sidebar,
-} from "semantic-ui-react";
+import { Container, Grid, Button, Menu, Segment, Sidebar } from "semantic-ui-react";
 import Navbar from "./Navbar";
-import { useAccountMonitor } from "../hooks";
+import { useAccountMonitor, useChampionCache } from "../hooks";
 
 const Layout = ({ children }: { children?: JSX.Element }): JSX.Element => {
   const { state, reducer: r } = useContext(AppContext);
 
-  useAccountMonitor()
+  useAccountMonitor();
+  useChampionCache();
 
   function setNavbar(a: boolean): void {
     r({ type: ETypes.SetNavbar, payload: a });

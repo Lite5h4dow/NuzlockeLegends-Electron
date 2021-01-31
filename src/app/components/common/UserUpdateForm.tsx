@@ -1,10 +1,4 @@
-import React, {
-  FormEvent,
-  ChangeEvent,
-  useContext,
-  useState,
-  SyntheticEvent,
-} from "react";
+import React, {FormEvent, ChangeEvent, useContext, useState, SyntheticEvent} from "react";
 import {Checkbox, Form, Input} from "semantic-ui-react";
 import {AppContext} from "../context/context";
 import {auth} from "../plugins/firebase";
@@ -17,9 +11,7 @@ const UserUpdateForm = () => {
     return <></>;
   }
 
-  const [displayName, setDisplayName] = useState(
-    auth().currentUser!.displayName || ""
-  );
+  const [displayName, setDisplayName] = useState(auth().currentUser!.displayName || "");
 
   const [password, setPassword] = useState("");
   const [passVisible, setPassVisible] = useState(false);

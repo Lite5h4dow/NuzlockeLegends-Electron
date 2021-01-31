@@ -1,8 +1,7 @@
-import React, {useContext} from "react";
-import {AppContext} from "../context/context";
+import React, { useContext } from "react";
 
-import {Menu} from "semantic-ui-react";
-import {Link} from "react-router-dom";
+import { Menu } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 const Navbar = (): JSX.Element => {
   return (
@@ -10,9 +9,13 @@ const Navbar = (): JSX.Element => {
       <Menu.Item as={Link} to="/">
         Play
       </Menu.Item>
+      <Menu.Item as={Link} to="/LiveGame">
+        Live Game
+      </Menu.Item>
       <Menu.Item as={Link} to="/Options">
         Options
       </Menu.Item>
+
     </>
   );
 };

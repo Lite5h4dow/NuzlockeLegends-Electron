@@ -7,13 +7,7 @@ const UserFormMessage = (): JSX.Element => {
 
   const error = state.user.loginService.error;
 
-  return (
-    <Message
-      visible={error != null}
-      content={error != null ? error.message : ""}
-      error
-    />
-  );
+  return <Message visible={error != null} content={error != null ? error.message : ""} error />;
 };
 
 export default UserFormMessage;

@@ -1,24 +1,24 @@
-import React, { useContext } from "react";
-import { Modal, Tab } from "semantic-ui-react";
-import { AppContext } from "../context/context";
-import { auth } from "../plugins/firebase";
-import { ETypes } from "../reducers";
+import React, {useContext} from "react";
+import {Modal, Tab} from "semantic-ui-react";
+import {AppContext} from "../context/context";
+import {auth} from "../plugins/firebase";
+import {ETypes} from "../reducers";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
 import UserProfile from "./UserProfile";
 
 export const UserModal = (): JSX.Element => {
-  const { state, reducer: r } = useContext(AppContext);
+  const {state, reducer: r} = useContext(AppContext);
 
-  const { user } = state;
+  const {user} = state;
 
   function setLoginModal(a: boolean): void {
-    r({ type: ETypes.ToggleUserModal, payload: a });
+    r({type: ETypes.ToggleUserModal, payload: a});
   }
 
   const panes = [
-    { menuItem: "Login", render: () => <LoginForm /> },
-    { menuItem: "Register", render: () => <RegisterForm /> },
+    {menuItem: "Login", render: () => <LoginForm />},
+    {menuItem: "Register", render: () => <RegisterForm />},
   ];
 
   return (
@@ -29,9 +29,7 @@ export const UserModal = (): JSX.Element => {
         setLoginModal(false);
       }}
     >
-      <Modal.Content>
-        {user.login.loggedIn ? <UserProfile /> : <Tab panes={panes} />}
-      </Modal.Content>
+      <Modal.Content>{user.login.loggedIn ? <UserProfile /> : <Tab panes={panes} />}</Modal.Content>
     </Modal>
   );
 };

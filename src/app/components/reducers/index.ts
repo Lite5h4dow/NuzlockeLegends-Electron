@@ -122,6 +122,18 @@ function reducer(state: IState, action: IAction): IState {
         },
       };
 
+    case ETypes.SetIsLoggedIn:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          login: {
+            ...state.user.login,
+            loggedIn: action.payload,
+          },
+        },
+      };
+
     default:
       return state;
   }

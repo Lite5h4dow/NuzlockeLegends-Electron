@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {IRequest} from "../interfaces";
-import axiosInstance from "../plugins/axios";
+import {firebaseInstance} from "../plugins/axios";
 
 export const useAssociatedAccounts = () => {
   const [associatedAccounts, setAssociatedAccounts] = useState<IRequest>({
@@ -10,7 +10,7 @@ export const useAssociatedAccounts = () => {
     console.log("log", uid == null);
     if (!!!uid) return;
     setAssociatedAccounts({loading: true});
-    axiosInstance({
+    firebaseInstance({
       method: "post",
       data: {uid},
       url: "/getAssociatedAccounts",

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {IRequest} from "../interfaces";
-import axiosInstance from "../plugins/axios";
+import {firebaseInstance} from "../plugins/axios";
 
 export const useRiotAccount = () => {
   const [riotAccount, setRiotAccount] = useState<IRequest>({
@@ -9,7 +9,7 @@ export const useRiotAccount = () => {
 
   function getRiotAccount(summonerName: string, summonerRegion: string, uid?: string): void {
     setRiotAccount({loading: true});
-    axiosInstance({
+    firebaseInstance({
       method: "post",
       data: {uid, summonerName, summonerRegion},
       url: "/getRiotAccount",

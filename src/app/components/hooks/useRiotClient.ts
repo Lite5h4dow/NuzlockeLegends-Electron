@@ -1,18 +1,25 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import {IRequest} from "../interfaces";
+import {clientInstance} from "../plugins/axios";
 
 export const useRiotClient = () => {
   const [clientData, setClientData] = useState<IRequest>({loading: true});
+  const [gameLive, setGameLive] = useState<boolean>(false);
 
   function getRiotClientData() {
-    axios({method: "get", url: "http://localhost:2999/liveclientdata/allgamedata/"})
+    clientInstance({
+      method: "get",
+      url: "liveclientdata/allgamedata",
+    })
       .then(res => {
-        console.log(res);
+        console.log("data!", res);
         setClientData({loading: false, data: res.data});
+        setGameLive(true);
       })
       .catch(error => {
-        console.log(error);
+        console.log("Error!", error);
+        setGameLive(false);
         setClientData({loading: true, error});
       });
   }
@@ -24,5 +31,5 @@ export const useRiotClient = () => {
     };
   }, []);
 
-  return {clientData};
+  return {clientData, gameLive};
 };

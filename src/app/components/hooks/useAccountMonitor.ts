@@ -5,6 +5,11 @@ import {ETypes} from "../reducers";
 
 export const useAccountMonitor = () => {
   const {state, reducer} = useContext(AppContext);
+
+  useEffect(() => {
+    console.log("logged in", !!auth().currentUser);
+  }, []);
+
   useEffect(() => {
     reducer({type: ETypes.SetIsLoggedIn, payload: !!auth().currentUser});
   }, [auth().currentUser]);
